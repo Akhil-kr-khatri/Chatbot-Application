@@ -1,3 +1,13 @@
+name: Build and Push Frontend Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -7,13 +17,13 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: "20"
 
       - name: Install Dependencies
         working-directory: ai-chat-app
         run: npm ci
 
-      - name: Build React
+      - name: Build React Application
         working-directory: ai-chat-app
         run: npm run build
 
@@ -29,8 +39,8 @@ jobs:
             -t akhilkhatri/ai-chatbot-frontend:${{ github.sha }} \
             ./ai-chat-app
 
-      - run: docker push akhilkhatri/ai-chatbot-frontend:latest
+      - name: Push Latest
+        run: docker push akhilkhatri/ai-chatbot-frontend:latest
 
-      - run: docker push akhilkhatri/ai-chatbot-frontend:${{ github.sha }}
-
-      
+      - name: Push Version
+        run: docker push akhilkhatri/ai-chatbot-frontend:${{ github.sha }}

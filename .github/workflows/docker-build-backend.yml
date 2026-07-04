@@ -1,3 +1,13 @@
+name: Build and Push Backend Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -27,6 +37,8 @@ jobs:
             -t akhilkhatri/ai-chatbot-backend:${{ github.sha }} \
             ./ai-backend
 
-      - run: docker push akhilkhatri/ai-chatbot-backend:latest
+      - name: Push Latest
+        run: docker push akhilkhatri/ai-chatbot-backend:latest
 
-      - run: docker push akhilkhatri/ai-chatbot-backend:${{ github.sha }}
+      - name: Push Version
+        run: docker push akhilkhatri/ai-chatbot-backend:${{ github.sha }}
