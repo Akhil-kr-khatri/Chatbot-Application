@@ -25,7 +25,7 @@ function App() {
 
   // API URL
   const API_URL =
-    "/api/chat";
+    "/api/v1/chat";
 
   // ACTIVE CHAT
   const activeChat = chats.find(
