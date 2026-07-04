@@ -25,7 +25,7 @@ function App() {
 
   // API URL
   const API_URL =
-    "https://wwfl5icj62.execute-api.us-east-1.amazonaws.com/chat";
+    "/api/chat";
 
   // ACTIVE CHAT
   const activeChat = chats.find(
